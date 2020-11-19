@@ -1,2 +1,3 @@
-# mprocessing_tests
-Test repository for the minute processing development.
+# Minute processing tests
+
+Test repository for the minute processing development. It has absolutely no valuable content, it is used to test the effects of github API calls and related processing. Currently used by the https://github.com/iherman/scribejs-resolutions development.
