@@ -1,4 +1,5 @@
 {
+    "date": "2020-11-20T12:53:55.256Z",
     "file_names": [
         "2020-10-06-did.md",
         "2020-10-08-did-topic.md",
@@ -8,10 +9,73 @@
         "2020-11-02-did.md",
         "2020-11-03-did.md",
         "2020-11-04-did.md",
-        "2020-11-05-did.md",
-        "2020-11-17-did.md"
+        "2020-11-05-did.md"
     ],
     "resolutions": [
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 1,
+            "text": "The DID WG adopts Patent Policy 2020 (<a href=\"https://www.w3.org/Consortium/Patent-Policy-20200915/\">https://www.w3.org/Consortium/Patent-Policy-20200915/</a>)",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution1",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 2,
+            "text": "merge PR 455",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution2",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 1,
+            "text": "The DID WG adopts Patent Policy 2020 (<a href=\"https://www.w3.org/Consortium/Patent-Policy-20200915/\">https://www.w3.org/Consortium/Patent-Policy-20200915/</a>)",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution1",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 2,
+            "text": "merge PR 455",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution2",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 1,
+            "text": "The DID WG adopts Patent Policy 2020 (<a href=\"https://www.w3.org/Consortium/Patent-Policy-20200915/\">https://www.w3.org/Consortium/Patent-Policy-20200915/</a>)",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution1",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 2,
+            "text": "merge PR 455",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution2",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 1,
+            "text": "The DID WG adopts Patent Policy 2020 (<a href=\"https://www.w3.org/Consortium/Patent-Policy-20200915/\">https://www.w3.org/Consortium/Patent-Policy-20200915/</a>)",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution1",
+            "call": "did"
+        },
+        {
+            "year": 2020,
+            "date": "2020-11-17",
+            "number": 2,
+            "text": "merge PR 455",
+            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution2",
+            "call": "did"
+        },
         {
             "year": 2020,
             "date": "2020-11-17",
@@ -116,6 +180,5 @@
             "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-10-06-did#resolution1",
             "call": "did"
         }
-    ],
-    "date": "2020-11-19T16:05:24.959Z"
+    ]
 }
