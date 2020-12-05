@@ -2,5 +2,6 @@
     "dir"           : "/Users/ivan/W3C/github/Tools/mprocessing_tests",
     "minutes"       : "_minutes",
     "current"       : "assets/minute_processing.json",
-    "handle_issues" : true
+    "handle_issues" : true,
+    "local"         : true
 }

@@ -1,5 +1,5 @@
 {
-    "date": "2020-11-25T13:07:39.750Z",
+    "date": "2020-12-05T11:57:15.962Z",
     "file_names": [
         "2020-10-06-did.md",
         "2020-10-08-did-topic.md",
@@ -27,14 +27,6 @@
             "number": 2,
             "text": "merge PR 455",
             "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-17-did#resolution2",
-            "call": "did"
-        },
-        {
-            "year": 2020,
-            "date": "2020-11-05",
-            "number": 1,
-            "text": "Add a test to the test suite that includes <code>\"@context\":&amp;nbsp;true</code> when testing pure JSON implementations, which passes only if no error is thrown. The MIME type application/JSON corresponds to pure JSON processing.",
-            "url": "https://www.w3.org/2019/did-wg/Meetings/Minutes/2020-11-05-did#resolution1",
             "call": "did"
         },
         {
