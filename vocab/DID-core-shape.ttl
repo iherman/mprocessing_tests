@@ -1,0 +1,218 @@
+# You can run this, for example, with:
+#  pyshacl -s DID-core-shape.ttl -e DID-core.ttl -f human test.ttl
+#
+
+@prefix : <https://www.w3.org/ns/did/core-vocabulary#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@base <https://www.w3.org/ns/did/core-vocabulary> .
+
+
+:DIDDocumentShape a sh:NodeShape ;
+    sh:targetSubjectsOf 
+        :alsoKnownAs,
+        :assertionMethod,
+        :authentication,
+        :capabilityDelegation,
+        :capabilityInvocation,
+        :keyAgreement,
+        :service ;
+    sh:property 
+        [
+            # Not clear from the spec whether the the value should be, possibly, an rdf:List (the spec refers to an ordered set...)
+            sh:path :controller ;
+            sh:pattern "^did:[a-z0-9]+:[a-zA-Z0-9.-_]+" ;
+        ],[
+            sh:path :alsoKnownAs ;
+            sh:nodeKind sh:IRI ;
+        ],[
+            sh:path :assertionMethod ;
+            sh:class :VerificationMethod ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ],[
+            sh:path :authentication ;
+            sh:class :VerificationMethod ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ],[
+            sh:path :capabilityDelegation ;
+            sh:class :VerificationMethod ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ],[
+            sh:path :capabilityInvocation ;
+            sh:class :VerificationMethod ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ],[
+            sh:path :keyAgreement ;
+            sh:class :VerificationMethod ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ],[
+            sh:path :service ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ];
+.
+
+
+#######################################################################################
+#   Verification Methods
+#######################################################################################
+
+###################################### Generic Shapes #################################
+:VerShape a sh:NodeShape ;
+    # Generic shape for verification method, putting constraints on the allowed properties
+    sh:property 
+        [
+            sh:path :publicKeyJwk ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+        ],[
+            sh:path :publicKeyBase58 ;
+            sh:nodeKind sh:Literal ;
+        ],[
+            sh:path :publicKeyPem ;
+            sh:nodeKind sh:Literal ;
+        ],[
+            sh:path :controller ;
+            # A controller must be identified with a DID...
+            sh:pattern "^did:[a-z0-9]+:[a-zA-Z0-9.-_]+" ;
+        ],[
+            # The type must be identified, ie, there must be at least one 'type'
+            sh:path rdf:type ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+        ] ;
+.
+
+
+:JWKOrBase a sh:NodeShape ;
+    # The keys for most of the verifications method are set either by a JWK structure or
+    # a base58 entry. There must be only one entry.
+    # The usage of a public Key identified via a PEM is excluded
+    sh:xone (
+        [
+            sh:path :publicKeyBase58 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ]
+        [
+            sh:path :publicKeyJwk ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ]
+    ) ;
+    sh:property [
+        sh:path :publicKeyPem;
+        sh:maxCount 0 ;
+    ] ;
+.
+
+###################################### Generic Shapes #################################
+
+:VerificationMethodShape a sh:NodeShape ;
+    # I am actually not sure this is a useful shape, I believe it is never in use...
+    sh:targetClass :VerificationMethod ;
+    sh:and (
+        :VerShape
+    )
+.
+
+
+:RsaVerificationKey2018Shape a sh:NodeShape ;
+    # That is the only verification method that does not rely on JWK or base 58,
+    # but a based on the PEM
+    # The usage of a public Key identified via a PEM is excluded
+    sh:targetClass :RsaVerificationKey2018 ;
+    sh:and (
+        :VerShape
+        [
+            sh:path :publicKeyPem ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ]
+        [
+            sh:path :publicKeyBase58 ;
+            sh:maxCount 0 ;
+        ]
+        [
+            sh:path :publicKeyJwk ;
+            sh:maxCount 0 ;
+        ]
+    ) ;
+.
+
+
+:Ed25519VerificationKey2018Shape a sh:NodeShape ;
+    sh:targetClass :Ed25519VerificationKey2018 ;
+    sh:and (
+        :VerShape
+        :JWKOrBase58
+    )
+.
+
+
+:SchnorrSecp256k1VerificationKey2019Shape a sh:NodeShape ;
+    sh:targetClass :SchnorrSecp256k1VerificationKey2019 ;
+    sh:and (
+        :VerShape
+        :JWKOrBase58
+    )
+.
+
+
+:Secp256k1KoblitzShape a sh:NodeShape ;
+    sh:targetClass :Secp256k1Koblitz ;
+    sh:and (
+        :VerShape
+        :JWKOrBase58
+    )
+.
+
+
+:X25519KeyAgreementKey2019Shape a sh:NodeShape ;
+    sh:targetClass :X25519KeyAgreementKey2019 ;
+    sh:and (
+        :VerShape
+        :JWKOrBase58
+    )
+.
+
+
+# 
+# If the decision is to remove RsaVerificationKey2018 from the spec,
+# ie, if _all_ verification methods are based on either the Base58 or JWK, then the
+# situation becomes way simpler, and the following shape could encompass all of them: 
+#
+#:GenericVerificationMethod a sh:NodeShape ;
+#    sh:targetSubjectsOf
+#        :publicKeyJwk,
+#        :publicKeyBase58 ;
+#    sh:and (
+#        :VerShape
+#        :JWKOrBase
+#    )
+#.
+
+
+#######################################################################################
+#   Constraint on services
+#######################################################################################
+
+:ServiceShape a sh:NodeShape ;
+    sh:targetObjectsOf :service ;
+    sh:property [
+        sh:path :verificationMethod ;
+        sh:class :VerificationMethod ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+    ],[
+        sh:path :serviceEndpoint ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+    ],[
+        sh:path rdf:type ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+.
+
